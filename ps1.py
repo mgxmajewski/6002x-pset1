@@ -55,7 +55,18 @@ def greedy_cow_transport(cows,limit=10):
     trips
     """
     # TODO: Your code here
-    pass
+
+    cowsCopy = cows.copy()
+    cowsSorted = dict(sorted(cowsCopy.items(), key=lambda item: item[1], reverse=True))
+    print(cowsSorted)
+    for cow in cowsSorted:
+        max(cowsSorted)
+    # for cow in cowsCopy:
+    #     weight = cowsCopy[cow]
+    #     name = cow
+    #     max(cowsCopy)
+
+
 
 
 # Problem 2
