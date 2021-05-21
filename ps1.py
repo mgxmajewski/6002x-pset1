@@ -90,8 +90,9 @@ def partition_enumerator(partitions):
     :returns: dictionary enumerating lists of lists
     """
     partitions_enumerated = partitions
-    for partition in partitions_enumerated:
-        enumerate(partition)
+    partitions_enumerated = list(enumerate(partitions))
+    # for partition in partitions_enumerated:
+    #     enumerate(partition)
     return partitions_enumerated
 
 
