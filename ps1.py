@@ -3,7 +3,7 @@
 
 from ps1_partition import get_partitions
 import time
-
+import operator
 #================================
 # Part A: Transporting Space Cows
 #================================
@@ -54,13 +54,28 @@ def greedy_cow_transport(cows,limit=10):
     transported on a particular trip and the overall list containing all the
     trips
     """
-    # TODO: Your code here
 
     cowsCopy = cows.copy()
-    cowsSorted = dict(sorted(cowsCopy.items(), key=lambda item: item[1], reverse=True))
-    print(cowsSorted)
-    for cow in cowsSorted:
-        max(cowsSorted)
+    cowsSorted = sorted(cowsCopy.items(), key=lambda x: (-x[1], x[0]))
+    transportLog = []
+    transport = []
+    temp = []
+    totalWeight = 0
+    while len(temp) < len(cowsSorted):
+        for cow in range(len(cowsSorted)):
+            if cowsSorted[cow] not in temp:
+                tempWeight = cowsSorted[cow][1]
+                if tempWeight + totalWeight <= limit:
+                    transport.append(cowsSorted[cow][0])
+                    temp.append(cowsSorted[cow])
+                    totalWeight += tempWeight
+
+        transportLog.append(transport)
+        transport = []
+        totalWeight = 0
+
+    return transportLog
+
     # for cow in cowsCopy:
     #     weight = cowsCopy[cow]
     #     name = cow
@@ -90,7 +105,9 @@ def brute_force_cow_transport(cows,limit=10):
     transported on a particular trip and the overall list containing all the
     trips
     """
-    # TODO: Your code here
+    cows_copy = cows[:]
+    space_limit = limit
+
     pass
 
         
