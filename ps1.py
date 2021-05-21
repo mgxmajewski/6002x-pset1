@@ -83,6 +83,21 @@ def greedy_cow_transport(cows,limit=10):
 
 
 
+def partition_enumerator(partitions):
+    """
+    Enumerate all elements of input list of lists
+    :param partitions: list of lists
+    :returns: dictionary enumerating lists of lists
+    """
+    partitions_enumerated = partitions
+    for partition in partitions_enumerated:
+        enumerate(partition)
+    return partitions_enumerated
+
+
+
+
+
 
 # Problem 2
 def brute_force_cow_transport(cows,limit=10):
@@ -105,9 +120,8 @@ def brute_force_cow_transport(cows,limit=10):
     transported on a particular trip and the overall list containing all the
     trips
     """
-    cows_copy = cows[:]
+    cows_copy = cows.copy()
     space_limit = limit
-
     pass
 
         
