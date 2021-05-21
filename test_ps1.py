@@ -10,7 +10,7 @@ class TestPartitionEnumerator:
     def test_partition_enumerator(self):
         # given
         partitions = [["a", "b"], ["c", "d"]]
-        expected = [(1 ,["a", "b"]), (2, ["c", "d"])]
+        expected = [(0, ["a", "b"]), (1, ["c", "d"])]
         # when
         result = partition_enumerator(partitions)
         # then
