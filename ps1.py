@@ -24,7 +24,7 @@ def load_cows(filename):
     cow_dict = dict()
 
     f = open(filename, 'r')
-    
+
     for line in f:
         line_data = line.split(',')
         cow_dict[line_data[0]] = int(line_data[1])
@@ -82,6 +82,14 @@ def greedy_cow_transport(cows,limit=10):
     #     max(cowsCopy)
 
 
+def unique_combination_filter(partitions):
+    unique_combinations = []
+    for partition in partitions:
+        for cow_combination in partition:
+            if cow_combination not in unique_combinations:
+                unique_combinations.append(cow_combination) 
+    return unique_combinations
+
 
 def partition_enumerator(partitions):
     """
@@ -91,8 +99,6 @@ def partition_enumerator(partitions):
     """
     partitions_enumerated = partitions
     partitions_enumerated = list(enumerate(partitions))
-    # for partition in partitions_enumerated:
-    #     enumerate(partition)
     return partitions_enumerated
 
 
