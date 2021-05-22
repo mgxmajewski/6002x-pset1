@@ -1,4 +1,4 @@
-from ps1 import partition_enumerator, partition_eval
+from ps1 import partition_enumerator, partition_eval, find_best_solution
 import pytest
 from assertpy import assert_that
 
@@ -38,5 +38,20 @@ class TestPartitionEval:
 
 
 class TestFindBestSolution:
+
+    @pytest.fixture(autouse=True)
+    def prepare_find_best_solution(self):
+        self.find_best_solution = find_best_solution
+
     def test_find_best_solution(self):
-        assert False
+        # given
+        space_limit = 10
+        evaluated_partitions = [(12, 18, ['Betsy', 'Henrietta']),
+                                (0, 48, ['Henrietta', 'Millie', 'Lola', 'Florence', 'Moo Moo', 'Herman', 'Betsy', 'Milkshake', 'Maggie', 'Oreo']),
+                                (1007, 15, ['Millie', 'Lola', 'Florence', 'Moo Moo', 'Maggie']),
+                                (876, 10, ['Florence', 'Lola', 'Maggie', 'Moo Moo'])]
+        expected = [['Florence', 'Lola', 'Maggie', 'Moo Moo']]
+        # when
+        result = self.find_best_solution(evaluated_partitions, space_limit)
+        # then
+        assert_that(result).is_equal_to(expected)
