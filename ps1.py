@@ -102,7 +102,22 @@ def partition_enumerator(partitions):
     return partitions_enumerated
 
 
-
+def partition_eval(spaces_menu, partitions_enumerated):
+    """
+    Count space taken by cows for each partition
+    :param spaces_menu: dictionary with space values of each cow
+    :param partitions_enumerated: tuple (index, partition)
+    :returns: list of tuples with index and value of space taken by each combination
+    """
+    space_values_of_partitions = []
+    for partition in partitions_enumerated:
+        partition_index = partition[0]
+        cows_list = partition[1]
+        space_counter = 0
+        for cow in cows_list:
+            space_counter += spaces_menu[cow]
+        space_values_of_partitions.append((partition_index, space_counter))
+    return space_values_of_partitions
 
 
 
