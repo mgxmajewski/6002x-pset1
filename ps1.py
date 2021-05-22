@@ -4,9 +4,11 @@
 from ps1_partition import get_partitions
 import time
 import operator
-#================================
+
+
+# ================================
 # Part A: Transporting Space Cows
-#================================
+# ================================
 
 def load_cows(filename):
     """
@@ -32,7 +34,7 @@ def load_cows(filename):
 
 
 # Problem 1
-def greedy_cow_transport(cows,limit=10):
+def greedy_cow_transport(cows, limit=10):
     """
     Uses a greedy heuristic to determine an allocation of cows that attempts to
     minimize the number of spaceship trips needed to transport all the cows. The
@@ -87,7 +89,7 @@ def unique_combination_filter(partitions):
     for partition in partitions:
         for cow_combination in partition:
             if cow_combination not in unique_combinations:
-                unique_combinations.append(cow_combination) 
+                unique_combinations.append(cow_combination)
     return unique_combinations
 
 
@@ -118,17 +120,20 @@ def partition_eval(spaces_menu, partitions_enumerated):
         space_values_of_partitions.append((partition_index, space_counter, cows_list))
     return space_values_of_partitions
 
+
 def find_best_solution(evaluated_partitions, space_limit):
     """
     :param space_limit: limit of space in transporting vessel
     :param evaluated_partitions: tuple containing index, space value, and list of cows names
     :returns: list of best solutions for given space limit
     :"""
-
+    for partition in evaluated_partitions:
+        if partition[1] == space_limit:
+            return partition[2]
 
 
 # Problem 2
-def brute_force_cow_transport(cows,limit=10):
+def brute_force_cow_transport(cows, limit=10):
     """
     Finds the allocation of cows that minimizes the number of spaceship trips
     via brute force.  The brute force algorithm should follow the following method:
