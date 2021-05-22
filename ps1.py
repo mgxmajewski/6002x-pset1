@@ -127,9 +127,14 @@ def find_best_solution(evaluated_partitions, space_limit):
     :param evaluated_partitions: tuple containing index, space value, and list of cows names
     :returns: list of best solutions for given space limit
     :"""
+    best_score_temp = 0
+    best_list_temp = []
     for partition in evaluated_partitions:
-        if partition[1] == space_limit:
-            return partition[2]
+        if space_limit >= partition[1] > best_score_temp:
+            best_score_temp = partition[1]
+            if partition[1] <= space_limit:
+                best_list_temp.append(partition[2])
+    return best_list_temp
 
 
 # Problem 2
@@ -183,8 +188,8 @@ lines to print the result of your problem.
 """
 
 cows = load_cows("ps1_cow_data.txt")
-limit = 100
+limit = 10
 print(cows)
 
-print(greedy_cow_transport(cows, limit))
-print(brute_force_cow_transport(cows, limit))
+print('greedy', greedy_cow_transport(cows, limit))
+print('brute', brute_force_cow_transport(cows, limit))
