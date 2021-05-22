@@ -97,7 +97,6 @@ def partition_enumerator(partitions):
     :param partitions: list of lists
     :returns: tuple enumerating lists of lists
     """
-    partitions_enumerated = partitions
     partitions_enumerated = list(enumerate(partitions))
     return partitions_enumerated
 
@@ -116,7 +115,7 @@ def partition_eval(spaces_menu, partitions_enumerated):
         space_counter = 0
         for cow in cows_list:
             space_counter += spaces_menu[cow]
-        space_values_of_partitions.append((partition_index, space_counter))
+        space_values_of_partitions.append((partition_index, space_counter, cows_list))
     return space_values_of_partitions
 
 
