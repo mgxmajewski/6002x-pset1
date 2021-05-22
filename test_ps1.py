@@ -2,6 +2,7 @@ from ps1 import partition_enumerator, partition_eval
 import pytest
 from assertpy import assert_that
 
+
 class TestBruteForceCowsTransport:
     def test_brute_force_cow_transport(self):
         assert False
@@ -34,3 +35,8 @@ class TestPartitionEval:
         result = self.partition_eval(spaces_menu, test_partition)
         # then
         assert_that(result).is_equal_to(expected)
+
+
+class TestFindBestSolution:
+    def test_find_best_solution(self):
+        assert False

@@ -118,6 +118,13 @@ def partition_eval(spaces_menu, partitions_enumerated):
         space_values_of_partitions.append((partition_index, space_counter, cows_list))
     return space_values_of_partitions
 
+def find_best_solution(evaluated_partitions, space_limit):
+    """
+    :param space_limit: limit of space in transporting vessel
+    :param evaluated_partitions: tuple containing index, space value, and list of cows names
+    :returns: list of best solutions for given space limit
+    :"""
+
 
 
 # Problem 2
