@@ -87,7 +87,7 @@ def partition_enumerator(partitions):
     """
     Enumerate all elements of input list of lists
     :param partitions: list of lists
-    :returns: dictionary enumerating lists of lists
+    :returns: tuple enumerating lists of lists
     """
     partitions_enumerated = partitions
     partitions_enumerated = list(enumerate(partitions))
@@ -151,10 +151,8 @@ lines to print the result of your problem.
 """
 
 cows = load_cows("ps1_cow_data.txt")
-limit=100
+limit = 100
 print(cows)
 
 print(greedy_cow_transport(cows, limit))
 print(brute_force_cow_transport(cows, limit))
-
-
