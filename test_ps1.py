@@ -62,8 +62,9 @@ class TestFindBestSolution:
                                 (0, 48, ['Henrietta', 'Millie', 'Lola', 'Florence', 'Moo Moo', 'Herman', 'Betsy', 'Milkshake', 'Maggie', 'Oreo']),
                                 (1007, 15, ['Millie', 'Lola', 'Florence', 'Moo Moo', 'Maggie']),
                                 (876, 10, ['Florence', 'Lola', 'Maggie', 'Moo Moo'])]
-        expected = [['Florence', 'Lola', 'Maggie', 'Moo Moo']]
+        expected = ['Florence', 'Lola', 'Maggie', 'Moo Moo']
         # when
         result = self.find_best_solution(evaluated_partitions, space_limit)
+        print(result)
         # then
         assert_that(result).is_equal_to(expected)

@@ -129,11 +129,19 @@ def find_best_solution(evaluated_partitions, space_limit):
     :"""
     best_score_temp = 0
     best_list_temp = []
+    # for partition in evaluated_partitions:
+    #     if space_limit >= partition[1] > best_score_temp:
+    #         best_score_temp = partition[1]
+    #         best_list_temp = partition[2]
+    #         if best_score_temp == space_limit:
+    #             best_list_temp.append(partition[2])
+    # return best_list_temp
     for partition in evaluated_partitions:
         if space_limit >= partition[1] > best_score_temp:
             best_score_temp = partition[1]
             if partition[1] <= space_limit:
-                best_list_temp.append(partition[2])
+                for cow in partition[2]:
+                    best_list_temp.append(cow)
     return best_list_temp
 
 
