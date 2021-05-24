@@ -1,11 +1,23 @@
-from ps1 import partition_enumerator, partition_eval, find_best_solution
+from ps1 import partition_enumerator, partition_eval, find_best_solution, brute_force_cow_transport
 import pytest
 from assertpy import assert_that
 
 
 class TestBruteForceCowsTransport:
+
+    @pytest.fixture(autouse=True)
+    def prepare_brute_force_cow_transport(self):
+        self.brute_force_cow_transport = brute_force_cow_transport
+
     def test_brute_force_cow_transport(self):
-        assert False
+        # given
+        cows_to_transport = {'Miss Bella': 25, 'Boo': 20, 'Milkshake': 40, 'Lotus': 40, 'Horns': 25, 'MooMoo': 50}
+        space_limit = 100
+        expected = [['MooMoo', 'Horns', 'Miss Bella'], ['Milkshake', 'Lotus', 'Boo']]
+        # when
+        result = self.brute_force_cow_transport(cows_to_transport, space_limit)
+        # then
+        assert_that(result).is_equal_to(expected)
 
 
 class TestPartitionEnumerator:
