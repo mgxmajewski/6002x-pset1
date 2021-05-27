@@ -161,20 +161,21 @@ def brute_force_cow_transport(cows, limit=10):
     """
     cows_copy = cows.copy()
     space_limit = limit
-    unique_cows_combination = unique_combination_filter(get_partitions(cows_copy))
-    enumerated_cows_partitions = partition_enumerator(unique_cows_combination)
-    evaluated_partitions = partition_eval(cows_copy, enumerated_cows_partitions)
-    print(evaluated_partitions)
-    print(find_best_solution(evaluated_partitions, space_limit))
+    # unique_cows_combination = unique_combination_filter(get_partitions(cows_copy))
+    # enumerated_cows_partitions = partition_enumerator(unique_cows_combination)
+    # evaluated_partitions = partition_eval(cows_copy, enumerated_cows_partitions)
+    # print(evaluated_partitions)
+    # print(find_best_solution(evaluated_partitions, space_limit))
     result = []
     while len(cows_copy) > 0:
+        unique_cows_combination = unique_combination_filter(get_partitions(cows_copy))
+        enumerated_cows_partitions = partition_enumerator(unique_cows_combination)
+        evaluated_partitions = partition_eval(cows_copy, enumerated_cows_partitions)
         transport_partition = find_best_solution(evaluated_partitions, space_limit)
         result.append(transport_partition)
         for cow in transport_partition:
             del cows_copy[cow]
-        unique_cows_combination = unique_combination_filter(get_partitions(cows_copy))
-        enumerated_cows_partitions = partition_enumerator(unique_cows_combination)
-        evaluated_partitions = partition_eval(cows_copy, enumerated_cows_partitions)
+
 
     return result
 
