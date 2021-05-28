@@ -1,6 +1,7 @@
 from ps1 import partition_enumerator, partition_eval, find_best_solution, brute_force_cow_transport
 import pytest
 from assertpy import assert_that
+import collections
 
 
 class TestBruteForceCowsTransport:
@@ -13,11 +14,25 @@ class TestBruteForceCowsTransport:
         # given
         cows_to_transport = {'Miss Bella': 25, 'Boo': 20, 'Milkshake': 40, 'Lotus': 40, 'Horns': 25, 'MooMoo': 50}
         space_limit = 100
-        expected = [['MooMoo', 'Horns', 'Miss Bella'], ['Milkshake', 'Lotus', 'Boo']]
+        expected = [['MooMoo', 'Miss Bella', 'Horns'], ['Milkshake', 'Lotus', 'Boo']]
+
         # when
-        result = self.brute_force_cow_transport(cows_to_transport, space_limit)
+        brute_force = self.brute_force_cow_transport(cows_to_transport, space_limit)
+
         # then
-        assert_that(result).is_equal_to(expected)
+        def eval_lists(brute_force, expected):
+            unordered_transports_comparisons = []
+            for transport in range(len(expected)):
+                compare = lambda x, y: collections.Counter(x) == collections.Counter(y)
+                unordered_transports_comparisons.append(compare(brute_force[transport], expected[transport]))
+                print(unordered_transports_comparisons)
+                if all([x == True for x in unordered_transports_comparisons]):
+                    return True
+                else:
+                    return False
+
+        result = eval_lists(brute_force, expected)
+        assert_that(result).is_true()
 
 
 class TestPartitionEnumerator:
