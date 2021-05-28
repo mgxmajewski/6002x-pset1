@@ -39,14 +39,15 @@ class TestBruteForceCowsTransport:
         def eval_lists(brute_force_result, expected_solution):
             unordered_transports_comparisons = []
             for transport in range(len(expected_solution)):
+                print()
+                print(brute_force_result[transport], expected_solution[transport])
                 compare = lambda x, y: collections.Counter(x) == collections.Counter(y)
                 unordered_transports_comparisons.append(compare(brute_force_result[transport],
                                                                 expected_solution[transport]))
-                print(unordered_transports_comparisons)
-                if all([x == True for x in unordered_transports_comparisons]):
-                    return True
-                else:
-                    return False
+            if all([x == True for x in unordered_transports_comparisons]):
+                return True
+            else:
+                return False
 
         result = eval_lists(brute_force, expected)
         assert_that(result).is_true()
