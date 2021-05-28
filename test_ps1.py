@@ -51,8 +51,6 @@ class TestBruteForceCowsTransport:
         result = eval_lists(brute_force, expected)
         assert_that(result).is_true()
 
-
-class TestPartitionEnumerator:
     def test_partition_enumerator(self):
         # given
         partitions = [["a", "b"], ["c", "d"]]
@@ -61,9 +59,6 @@ class TestPartitionEnumerator:
         result = partition_enumerator(partitions)
         # then
         assert_that(result).is_equal_to(expected)
-
-
-class TestPartitionEval:
 
     @pytest.fixture(autouse=True)
     def prepare_partition_eval(self):
@@ -79,9 +74,6 @@ class TestPartitionEval:
         result = self.partition_eval(spaces_menu, test_partition)
         # then
         assert_that(result).is_equal_to(expected)
-
-
-class TestFindBestSolution:
 
     @pytest.fixture(autouse=True)
     def prepare_find_best_solution(self):
