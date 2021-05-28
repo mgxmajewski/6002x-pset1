@@ -10,21 +10,38 @@ class TestBruteForceCowsTransport:
     def prepare_brute_force_cow_transport(self):
         self.brute_force_cow_transport = brute_force_cow_transport
 
-    def test_brute_force_cow_transport(self):
+    # case1
+    cows_to_transport_1 = {'Miss Bella': 25, 'Boo': 20, 'Milkshake': 40, 'Lotus': 40, 'Horns': 25, 'MooMoo': 50}
+    space_limit_1 = 100
+    expected_1 = [['MooMoo', 'Miss Bella', 'Horns'], ['Milkshake', 'Lotus', 'Boo']]
+    case_1 = cows_to_transport_1, space_limit_1, expected_1
+
+    # case2
+    cows_to_transport_2 = {'Daisy': 50, 'Buttercup': 72, 'Betsy': 65}
+    space_limit_2 = 75
+    expected_2 = [['Buttercup'], ['Betsy'], ['Daisy']]
+    case_2 = cows_to_transport_2, space_limit_2, expected_2
+
+    # case3
+    cows_to_transport_3 = {'Starlight': 54, 'Buttercup': 11, 'Luna': 41, 'Betsy': 39}
+    space_limit_3 = 145
+    expected_3 = [['Buttercup', 'Starlight', 'Betsy', 'Luna']]
+    case_3 = cows_to_transport_3, space_limit_3, expected_3
+
+    @pytest.mark.parametrize("cows_to_transport, space_limit, expected", [case_1, case_2, case_3])
+    def test_brute_force_cow_transport(self, cows_to_transport, space_limit, expected):
         # given
-        cows_to_transport = {'Miss Bella': 25, 'Boo': 20, 'Milkshake': 40, 'Lotus': 40, 'Horns': 25, 'MooMoo': 50}
-        space_limit = 100
-        expected = [['MooMoo', 'Miss Bella', 'Horns'], ['Milkshake', 'Lotus', 'Boo']]
 
         # when
         brute_force = self.brute_force_cow_transport(cows_to_transport, space_limit)
 
         # then
-        def eval_lists(brute_force, expected):
+        def eval_lists(brute_force_result, expected_solution):
             unordered_transports_comparisons = []
-            for transport in range(len(expected)):
+            for transport in range(len(expected_solution)):
                 compare = lambda x, y: collections.Counter(x) == collections.Counter(y)
-                unordered_transports_comparisons.append(compare(brute_force[transport], expected[transport]))
+                unordered_transports_comparisons.append(compare(brute_force_result[transport],
+                                                                expected_solution[transport]))
                 print(unordered_transports_comparisons)
                 if all([x == True for x in unordered_transports_comparisons]):
                     return True
@@ -74,7 +91,9 @@ class TestFindBestSolution:
         # given
         space_limit = 10
         evaluated_partitions = [(12, 18, ['Betsy', 'Henrietta']),
-                                (0, 48, ['Henrietta', 'Millie', 'Lola', 'Florence', 'Moo Moo', 'Herman', 'Betsy', 'Milkshake', 'Maggie', 'Oreo']),
+                                (0, 48,
+                                 ['Henrietta', 'Millie', 'Lola', 'Florence', 'Moo Moo', 'Herman', 'Betsy', 'Milkshake',
+                                  'Maggie', 'Oreo']),
                                 (1007, 15, ['Millie', 'Lola', 'Florence', 'Moo Moo', 'Maggie']),
                                 (876, 10, ['Florence', 'Lola', 'Maggie', 'Moo Moo'])]
         expected = ['Florence', 'Lola', 'Maggie', 'Moo Moo']
