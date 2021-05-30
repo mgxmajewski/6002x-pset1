@@ -33,6 +33,15 @@ def load_cows(filename):
     return cow_dict
 
 
+def sort_cows (cows):
+    """Sort dictionary with cows
+    :param cows: unsorted dictionary
+    :returns: sorted dictionary
+    """
+    sorted_cows = {k: v for k, v in sorted(cows.items(), key=lambda item: item[1], reverse=True)}
+    return sorted_cows
+
+
 # Problem 1
 def greedy_cow_transport(cows, limit=10):
     """
@@ -56,8 +65,8 @@ def greedy_cow_transport(cows, limit=10):
     transported on a particular trip and the overall list containing all the
     trips
     """
-
-    pass
+    sorted_cows = sort_cows(cows)
+    return sorted_cows, cows
 
 
 def unique_combination_filter(partitions):
