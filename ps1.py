@@ -65,8 +65,11 @@ def greedy_cow_transport(cows, limit=10):
     transported on a particular trip and the overall list containing all the
     trips
     """
-    sorted_cows = sort_cows(cows)
-    return sorted_cows, cows
+    cows_copy = cows.copy()
+    sorted_cows = sort_cows(cows_copy)
+    result = []
+
+    return result
 
 
 def unique_combination_filter(partitions):
