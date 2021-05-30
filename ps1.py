@@ -33,12 +33,12 @@ def load_cows(filename):
     return cow_dict
 
 
-def sort_cows (cows):
+def sort_cows(cows_to_sort):
     """Sort dictionary with cows
-    :param cows: unsorted dictionary
+    :param cows_to_sort: unsorted dictionary
     :returns: sorted dictionary
     """
-    sorted_cows = {k: v for k, v in sorted(cows.items(), key=lambda item: item[1], reverse=True)}
+    sorted_cows = {k: v for k, v in sorted(cows_to_sort.items(), key=lambda item: item[1], reverse=True)}
     return sorted_cows
 
 
