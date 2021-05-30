@@ -114,7 +114,12 @@ class TestGreedyCowTransport:
     def test_sort_cows(self):
         # given
         cows = {'Maggie': 3, 'Herman': 7, 'Betsy': 9, 'Oreo': 6, 'Moo Moo': 3, 'Milkshake': 2, 'Millie': 5, 'Lola': 2, 'Florence': 2, 'Henrietta': 9}
+        expected = {'Betsy': 9, 'Henrietta': 9, 'Herman': 7, 'Oreo': 6, 'Millie': 5, 'Maggie': 3, 'Moo Moo': 3,
+                    'Milkshake': 2, 'Lola': 2, 'Florence': 2}
+        # when
+        result = self.sort_cows(cows)
 
+        #then
+        assert_that(result).is_equal_to(expected)
 
-        expected = {'Betsy': 9, 'Henrietta': 9, 'Herman': 7, 'Oreo': 6, 'Millie': 5, 'Maggie': 3, 'Moo Moo': 3, 'Milkshake': 2, 'Lola': 2, 'Florence': 2}
 
