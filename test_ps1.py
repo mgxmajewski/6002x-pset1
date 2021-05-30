@@ -1,4 +1,5 @@
-from ps1 import partition_enumerator, partition_eval, find_best_solution, brute_force_cow_transport
+from ps1 import partition_enumerator, partition_eval, find_best_solution, brute_force_cow_transport, \
+    greedy_cow_transport, sort_cows
 import pytest
 from assertpy import assert_that
 import collections
@@ -95,3 +96,25 @@ class TestBruteForceCowsTransport:
         print(result)
         # then
         assert_that(result).is_equal_to(expected)
+
+
+class TestGreedyCowTransport:
+
+    @pytest.fixture(autouse=True)
+    def prepare_greedy_cow_transport(self):
+        self.greedy_cow_transport = greedy_cow_transport
+
+    def test_greedy_cow_transport(self):
+        assert False
+
+    @pytest.fixture(autouse=True)
+    def prepare_sort_cows(self):
+        self.sort_cows = sort_cows
+
+    def test_sort_cows(self):
+        # given
+        cows = {'Maggie': 3, 'Herman': 7, 'Betsy': 9, 'Oreo': 6, 'Moo Moo': 3, 'Milkshake': 2, 'Millie': 5, 'Lola': 2, 'Florence': 2, 'Henrietta': 9}
+
+
+        expected = {'Betsy': 9, 'Henrietta': 9, 'Herman': 7, 'Oreo': 6, 'Millie': 5, 'Maggie': 3, 'Moo Moo': 3, 'Milkshake': 2, 'Lola': 2, 'Florence': 2}
+
