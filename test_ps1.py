@@ -103,8 +103,36 @@ class TestGreedyCowTransport:
     def prepare_greedy_cow_transport(self):
         self.greedy_cow_transport = greedy_cow_transport
 
-    def test_greedy_cow_transport(self):
-        assert False
+    # case1
+    cows_to_transport_1 = {'Miss Bella': 15, 'Milkshake': 75, 'MooMoo': 85, 'Louis': 45, 'Patches': 60, 'Polaris': 20,
+                           'Clover': 5, 'Horns': 50, 'Lotus': 10, 'Muscles': 65}
+    space_limit_1 = 100
+    expected_1 = [['MooMoo', 'Miss Bella'], ['Milkshake', 'Polaris', 'Clover'], ['Muscles', 'Lotus'], ['Patches'],
+                  ['Horns', 'Louis']]
+    case_1 = cows_to_transport_1, space_limit_1, expected_1
+
+    # case2
+    cows_to_transport_2 = {'Abby': 38, 'Dottie': 85, 'Lilly': 24, 'Buttercup': 72, 'Daisy': 50, 'Betsy': 65,
+                           'Willow': 35, 'Rose': 50, 'Coco': 10, 'Patches': 12}
+    space_limit_2 = 100
+    expected_2 = [['Dottie', 'Patches'], ['Buttercup', 'Lilly'], ['Betsy', 'Willow'], ['Daisy', 'Rose'],
+                  ['Abby', 'Coco']]
+    case_2 = cows_to_transport_2, space_limit_2, expected_2
+
+    # case3
+    cows_to_transport_3 = {'Abby': 28, 'Starlight': 54, 'Buttercup': 11, 'Willow': 59, 'Betsy': 39, 'Luna': 41,
+                           'Rose': 42, 'Coco': 59}
+    space_limit_3 = 120
+    expected_3 = [['Willow', 'Coco'], ['Starlight', 'Rose', 'Buttercup'], ['Luna', 'Betsy', 'Abby']]
+    case_3 = cows_to_transport_3, space_limit_3, expected_3
+
+    @pytest.mark.parametrize("cows_to_transport, space_limit, expected", [case_1, case_2, case_3])
+    def test_greedy_cow_transport(self, cows_to_transport, space_limit, expected):
+        # when
+        greedy = self.greedy_cow_transport(cows_to_transport, space_limit)
+
+        #then
+        assert_that(greedy).is_equal_to(expected)
 
     @pytest.fixture(autouse=True)
     def prepare_sort_cows(self):
@@ -112,11 +140,12 @@ class TestGreedyCowTransport:
 
     def test_sort_cows(self):
         # given
-        cows = {'Maggie': 3, 'Herman': 7, 'Betsy': 9, 'Oreo': 6, 'Moo Moo': 3, 'Milkshake': 2, 'Millie': 5, 'Lola': 2, 'Florence': 2, 'Henrietta': 9}
+        cows = {'Maggie': 3, 'Herman': 7, 'Betsy': 9, 'Oreo': 6, 'Moo Moo': 3, 'Milkshake': 2, 'Millie': 5, 'Lola': 2,
+                'Florence': 2, 'Henrietta': 9}
         expected = {'Betsy': 9, 'Henrietta': 9, 'Herman': 7, 'Oreo': 6, 'Millie': 5, 'Maggie': 3, 'Moo Moo': 3,
                     'Milkshake': 2, 'Lola': 2, 'Florence': 2}
         # when
         result = self.sort_cows(cows)
 
-        #then
+        # then
         assert_that(result).is_equal_to(expected)
