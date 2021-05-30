@@ -31,12 +31,10 @@ class TestBruteForceCowsTransport:
 
     @pytest.mark.parametrize("cows_to_transport, space_limit, expected", [case_1, case_2, case_3])
     def test_brute_force_cow_transport(self, cows_to_transport, space_limit, expected):
-        # given
-
         # when
         brute_force = self.brute_force_cow_transport(cows_to_transport, space_limit)
 
-        # then
+        # helper function to compare lists containing same values (no specific order necessary)
         def eval_lists(brute_force_result, expected_solution):
             unordered_transports_comparisons = []
             for transport in range(len(expected_solution)):
@@ -50,6 +48,7 @@ class TestBruteForceCowsTransport:
             else:
                 return False
 
+        # then
         result = eval_lists(brute_force, expected)
         assert_that(result).is_true()
 
@@ -121,5 +120,3 @@ class TestGreedyCowTransport:
 
         #then
         assert_that(result).is_equal_to(expected)
-
-
