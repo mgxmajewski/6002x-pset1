@@ -126,13 +126,53 @@ class TestGreedyCowTransport:
     expected_3 = [['Willow', 'Coco'], ['Starlight', 'Rose', 'Buttercup'], ['Luna', 'Betsy', 'Abby']]
     case_3 = cows_to_transport_3, space_limit_3, expected_3
 
-    @pytest.mark.parametrize("cows_to_transport, space_limit, expected", [case_1, case_2, case_3])
+    # case4
+    cows_to_transport_4 = {'Patches': 60, 'Polaris': 20, 'Clover': 5, 'Louis': 45, 'Lotus': 10, 'Milkshake': 75,
+                           'Miss Bella': 15, 'MooMoo': 85, 'Horns': 50, 'Muscles': 65}
+    space_limit_4 = 100
+    expected_4 = [['MooMoo', 'Miss Bella'], ['Milkshake', 'Polaris', 'Clover'], ['Muscles', 'Lotus'],
+                  ['Patches'], ['Horns', 'Louis']]
+    case_4 = cows_to_transport_4, space_limit_4, expected_4
+
+    # case5
+    cows_to_transport_5 = {'Daisy': 50, 'Patches': 12, 'Buttercup': 72, 'Betsy': 65, 'Willow': 35, 'Coco': 10,
+                           'Dottie': 85, 'Rose': 50, 'Lilly': 24, 'Abby': 38}
+    space_limit_5 = 100
+    expected_5 = [['Dottie', 'Patches'], ['Buttercup', 'Lilly'], ['Betsy', 'Willow'],
+                  ['Rose', 'Daisy'], ['Abby', 'Coco']]
+    case_5 = cows_to_transport_5, space_limit_5, expected_5
+
+    # case6
+    cows_to_transport_6 = {'Buttercup': 11, 'Betsy': 39, 'Starlight': 54, 'Coco': 59, 'Willow': 59, 'Luna': 41,
+                           'Rose': 42, 'Abby': 28}
+    space_limit_6 = 120
+    expected_6 = [['Willow', 'Coco'], ['Starlight', 'Rose', 'Buttercup'], ['Luna', 'Betsy', 'Abby']]
+    case_6 = cows_to_transport_6, space_limit_6, expected_6
+
+    @pytest.mark.parametrize("cows_to_transport, space_limit, expected", [case_1, case_2, case_3, case_4, case_5, case_6])
     def test_greedy_cow_transport(self, cows_to_transport, space_limit, expected):
         # when
         greedy = self.greedy_cow_transport(cows_to_transport, space_limit)
 
+        def eval_lists(greedy_result, expected_solution):
+            unordered_transports_comparisons = []
+            for transport in range(len(expected_solution)):
+                print()
+                print(greedy_result[transport], expected_solution[transport])
+                compare = lambda x, y: collections.Counter(x) == collections.Counter(y)
+                unordered_transports_comparisons.append(compare(greedy_result[transport],
+                                                                expected_solution[transport]))
+            if all([x == True for x in unordered_transports_comparisons]):
+                return True
+            else:
+                return False
+
         # then
-        assert_that(greedy).is_equal_to(expected)
+        result = eval_lists(greedy, expected)
+        assert_that(result).is_true()
+
+        # then
+        assert_that(result).is_true()
 
     @pytest.fixture(autouse=True)
     def prepare_sort_cows(self):
@@ -156,14 +196,10 @@ class TestGreedyCowTransport:
 
     def test_greedy_one_trip(self):
         cows_to_transport = {'Abby': 38, 'Dottie': 85, 'Lilly': 24, 'Buttercup': 72, 'Daisy': 50, 'Betsy': 65,
-                               'Willow': 35, 'Rose': 50, 'Coco': 10, 'Patches': 12}
+                             'Willow': 35, 'Rose': 50, 'Coco': 10, 'Patches': 12}
         space_limit = 100
-        expected = [['Dottie', 'Patches']]
+        expected = ['Abby', 'Lilly', 'Willow']
 
         result = self.greedy_one_trip(cows_to_transport, space_limit)
 
         assert_that(result).is_equal_to(expected)
-
-
-
-
