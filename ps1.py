@@ -41,6 +41,15 @@ def sort_cows(cows_to_sort):
     sorted_cows = {k: v for k, v in sorted(cows_to_sort.items(), key=lambda item: item[1], reverse=True)}
     return sorted_cows
 
+def greedy_one_trip(cow_dict, limit):
+    total_weight = 0
+    temp_result = []
+    for cow in cow_dict:
+        if total_weight + cow_dict[cow] <= limit:
+            total_weight += cow_dict[cow]
+            temp_result.append(cow)
+
+    return temp_result
 
 # Problem 1
 def greedy_cow_transport(cows, limit=10):
