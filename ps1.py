@@ -41,6 +41,7 @@ def sort_cows(cows_to_sort):
     sorted_cows = {k: v for k, v in sorted(cows_to_sort.items(), key=lambda item: item[1], reverse=True)}
     return sorted_cows
 
+
 def greedy_one_trip(cow_dict, limit):
     total_weight = 0
     temp_result = []
@@ -48,8 +49,8 @@ def greedy_one_trip(cow_dict, limit):
         if total_weight + cow_dict[cow] <= limit:
             total_weight += cow_dict[cow]
             temp_result.append(cow)
-
     return temp_result
+
 
 # Problem 1
 def greedy_cow_transport(cows, limit=10):
@@ -68,16 +69,20 @@ def greedy_cow_transport(cows, limit=10):
     Parameters:
     cows - a dictionary of name (string), weight (int) pairs
     limit - weight limit of the spaceship (an int)
-    
+
     Returns:
     A list of lists, with each inner list containing the names of cows
     transported on a particular trip and the overall list containing all the
     trips
     """
-    cows_copy = cows.copy()
-    sorted_cows = sort_cows(cows_copy)
+    cows_copy = sort_cows(cows.copy())
+    space_limit = limit
     result = []
-
+    while len(cows_copy) > 0:
+        transport_partition = greedy_one_trip(cows_copy, space_limit)
+        result.append(transport_partition)
+        for cow in transport_partition:
+            del cows_copy[cow]
     return result
 
 
