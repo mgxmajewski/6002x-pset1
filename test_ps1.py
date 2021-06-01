@@ -1,5 +1,5 @@
 from ps1 import partition_enumerator, partition_eval, find_best_solution, brute_force_cow_transport, \
-    greedy_cow_transport, sort_cows, greedy_one_trip
+    greedy_cow_transport, sort_cows, select_cows_per_trip
 import pytest
 from assertpy import assert_that
 import collections
@@ -192,14 +192,14 @@ class TestGreedyCowTransport:
 
     @pytest.fixture(autouse=True)
     def prepare_greedy_one_trip(self):
-        self.greedy_one_trip = greedy_one_trip
+        self.select_cows_per_trip = select_cows_per_trip
 
-    def test_greedy_one_trip(self):
+    def test_select_cows_per_trip(self):
         cows_to_transport = {'Abby': 38, 'Dottie': 85, 'Lilly': 24, 'Buttercup': 72, 'Daisy': 50, 'Betsy': 65,
                              'Willow': 35, 'Rose': 50, 'Coco': 10, 'Patches': 12}
         space_limit = 100
         expected = ['Abby', 'Lilly', 'Willow']
 
-        result = self.greedy_one_trip(cows_to_transport, space_limit)
+        result = self.select_cows_per_trip(cows_to_transport, space_limit)
 
         assert_that(result).is_equal_to(expected)

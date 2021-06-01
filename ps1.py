@@ -42,7 +42,7 @@ def sort_cows(cows_to_sort):
     return sorted_cows
 
 
-def greedy_one_trip(cow_dict, limit):
+def select_cows_per_trip(cow_dict, limit):
     total_weight = 0
     temp_result = []
     for cow in cow_dict:
@@ -79,7 +79,7 @@ def greedy_cow_transport(cows, limit=10):
     space_limit = limit
     result = []
     while len(cows_copy) > 0:
-        transport_partition = greedy_one_trip(cows_copy, space_limit)
+        transport_partition = select_cows_per_trip(cows_copy, space_limit)
         result.append(transport_partition)
         for cow in transport_partition:
             del cows_copy[cow]
