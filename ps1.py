@@ -3,7 +3,7 @@
 
 from ps1_partition import get_partitions
 import time
-import operator
+from collections import OrderedDict
 
 
 # ================================
@@ -38,7 +38,7 @@ def sort_cows(cows_to_sort):
     :param cows_to_sort: unsorted dictionary
     :returns: sorted dictionary
     """
-    sorted_cows = {k: v for k, v in sorted(cows_to_sort.items(), key=lambda item: item[1], reverse=True)}
+    sorted_cows = OrderedDict(sorted(cows_to_sort.items(), key=lambda item: item[1], reverse = True))
     return sorted_cows
 
 
@@ -173,7 +173,6 @@ def brute_force_cow_transport(cows, limit=10):
         for cow in transport_partition:
             del cows_copy[cow]
     return result
-
 
 
 # Problem 3
