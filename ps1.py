@@ -34,7 +34,8 @@ def load_cows(filename):
 
 
 def sort_cows(cows_to_sort):
-    """Sort dictionary with cows
+    """
+    Sort dictionary with cows
     :param cows_to_sort: unsorted dictionary
     :returns: sorted dictionary
     """
@@ -42,12 +43,18 @@ def sort_cows(cows_to_sort):
     return sorted_cows
 
 
-def select_cows_per_trip(cow_dict, limit):
+def select_cows_per_trip(cow_left_to_pick, space_limit):
+    """
+    Selects cows per each trip
+    :param cow_left_to_pick: unsorted dictionary
+    :param space_limit: limit of space in transporting vessel
+    :returns: sorted dictionary
+    """
     total_weight = 0
     temp_result = []
-    for cow in cow_dict:
-        if total_weight + cow_dict[cow] <= limit:
-            total_weight += cow_dict[cow]
+    for cow in cow_left_to_pick:
+        if total_weight + cow_left_to_pick[cow] <= space_limit:
+            total_weight += cow_left_to_pick[cow]
             temp_result.append(cow)
     return temp_result
 
